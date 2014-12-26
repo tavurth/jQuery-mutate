@@ -22,12 +22,12 @@ mutate_event_stack = [
 						return true;
 					}
 				}
-			}, 
+			},
 			{
 				name		: 'top',
 				handler 	: function (n){
 					if(!$(n).data('mutate-top'))$(n).data('mutate-top', $(n).css('top'));
-					
+
 					if ($(n).data('mutate-top')&&$(n).css('top') != $(n).data('mutate-top')  ) {
 						$(n).data('mutate-top', $(n).css('top'));
 						return true;
@@ -38,7 +38,7 @@ mutate_event_stack = [
 				name		: 'bottom',
 				handler 	: function (n){
 					if(!$(n).data('mutate-bottom'))$(n).data('mutate-bottom', $(n).css('bottom'));
-					
+
 					if ($(n).data('mutate-bottom')&&$(n).css('bottom') != $(n).data('mutate-bottom')  ) {
 						$(n).data('mutate-bottom', $(n).css('bottom'));
 						return true;
@@ -49,7 +49,7 @@ mutate_event_stack = [
 				name		: 'right',
 				handler 	: function (n){
 					if(!$(n).data('mutate-right'))$(n).data('mutate-right', $(n).css('right'));
-					
+
 					if ($(n).data('mutate-right')&&$(n).css('right') != $(n).data('mutate-right')  ) {
 						$(n).data('mutate-right', $(n).css('right'));
 						return true;
@@ -60,7 +60,7 @@ mutate_event_stack = [
 				name		: 'left',
 				handler 	: function (n){
 					if(!$(n).data('mutate-left'))$(n).data('mutate-left', $(n).css('left'));
-					
+
 					if ($(n).data('mutate-left')&&$(n).css('left') != $(n).data('mutate-left')  ) {
 						$(n).data('mutate-left', $(n).css('left'));
 						return true;
@@ -68,18 +68,32 @@ mutate_event_stack = [
 				}
 			},
 			{
-				name		: 'hide',
-				handler 	: function (n){ if ($(n).is(':hidden'))	return true; }
-			},
-			{
-				name		: 'show',
-				handler 	: function (n){ if ($(n).is(':visible'))	return true; }
-			},
+        name    : 'hide',
+        handler   : function (n){
+          var isHidden = $(n).is(':hidden'),
+              prevHidden = $(n).data('prev-hidden') == undefined ? isHidden : $(n).data('prev-hidden')
+          $(n).data('prev-hidden', isHidden)
+          if (isHidden && isHidden != prevHidden) {
+            return true;
+          }
+        }
+      },
+      {
+        name    : 'show',
+        handler   : function (n){
+          var isVisible = $(n).is(':visible'),
+              prevVisible = $(n).data('prev-visible') == undefined ? isVisible : $(n).data('prev-visible')
+          $(n).data('prev-visible', isVisible)
+          if (isVisible && isVisible != prevVisible) {
+            return true;
+          }
+        }
+      },
 			{
 				name		: 'scrollHeight',
 				handler 	: function (n){
 					if(!$(n).data('prev-scrollHeight'))$(n).data('prev-scrollHeight', $(n)[0].scrollHeight);
-					
+
 					if ($(n).data('prev-scrollHeight')&&$(n)[0].scrollHeight != $(n).data('prev-scrollHeight')  ) {
 						$(n).data('prev-scrollHeight', $(n)[0].scrollHeight);
 						return true;
@@ -90,7 +104,7 @@ mutate_event_stack = [
 				name		: 'scrollWidth',
 				handler 	: function (n){
 					if(!$(n).data('prev-scrollWidth'))$(n).data('prev-scrollWidth', $(n)[0].scrollWidth);
-					
+
 					if ($(n).data('prev-scrollWidth')&&$(n)[0].scrollWidth != $(n).data('prev-scrollWidth')  ) {
 						$(n).data('prev-scrollWidth', $(n)[0].scrollWidth);
 						return true;
@@ -101,7 +115,7 @@ mutate_event_stack = [
 				name		: 'scrollTop',
 				handler 	: function (n){
 					if(!$(n).data('prev-scrollTop'))$(n).data('prev-scrollTop', $(n)[0].scrollTop());
-					
+
 					if ($(n).data('prev-scrollTop')&&$(n)[0].scrollTop() != $(n).data('prev-scrollTop')  ) {
 						$(n).data('prev-scrollTop', $(n)[0].scrollTop());
 						return true;
@@ -112,7 +126,7 @@ mutate_event_stack = [
 				name		: 'scrollLeft',
 				handler 	: function (n){
 					if(!$(n).data('prev-scrollLeft'))$(n).data('prev-scrollLeft', $(n)[0].scrollLeft());
-					
+
 					if ($(n).data('prev-scrollLeft')&&$(n)[0].scrollLeft() != $(n).data('prev-scrollLeft')  ) {
 						$(n).data('prev-scrollLeft', $(n)[0].scrollLeft());
 						return true;
