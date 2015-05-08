@@ -2,11 +2,11 @@
 mutate_event_stack = [
 			{
 				name: 'width',
-				handler: function (elem){
-					n = {el:elem}
-					if(!$(n.el).data('mutate-width'))$(n.el).data('mutate-width', $(n.el).width());
-					if ($(n.el).data('mutate-width')&&$(n.el).width() != $(n.el).data('mutate-width')  ) {
-						$(n.el).data('mutate-width', $(n.el).width());
+				handler: function (n){
+					var e = $(n);
+					if(!e.data('mutate-width'))e.data('mutate-width', e.width());
+					if (e.data('mutate-width')&&e.width() != e.data('mutate-width')  ) {
+						e.data('mutate-width', e.width());
 						return true;
 					}
 					return false;
@@ -15,10 +15,10 @@ mutate_event_stack = [
 			{
 				name:'height',
 				handler: function (n){
-					element = n;
-					if(!$(element).data('mutate-height'))$(element).data('mutate-height', $(element).height());
-					if ($(element).data('mutate-height')&&$(element).height() != $(element).data('mutate-height')  ) {
-						$(element).data('mutate-height', $(element).height());
+					var e = $(n);
+					if(!e.data('mutate-height'))e.data('mutate-height', e.height());
+					if (e.data('mutate-height')&&e.height() != e.data('mutate-height')  ) {
+						e.data('mutate-height', e.height());
 						return true;
 					}
 				}
@@ -26,10 +26,11 @@ mutate_event_stack = [
 			{
 				name		: 'top',
 				handler 	: function (n){
-					if(!$(n).data('mutate-top'))$(n).data('mutate-top', $(n).css('top'));
+          var e = $(n);
+					if(!e.data('mutate-top'))e.data('mutate-top', e.css('top'));
 
-					if ($(n).data('mutate-top')&&$(n).css('top') != $(n).data('mutate-top')  ) {
-						$(n).data('mutate-top', $(n).css('top'));
+					if (e.data('mutate-top')&&e.css('top') != e.data('mutate-top')  ) {
+						e.data('mutate-top', e.css('top'));
 						return true;
 					}
 				}
@@ -37,10 +38,11 @@ mutate_event_stack = [
 			{
 				name		: 'bottom',
 				handler 	: function (n){
-					if(!$(n).data('mutate-bottom'))$(n).data('mutate-bottom', $(n).css('bottom'));
+          var e = $(n);
+					if(!e.data('mutate-bottom'))e.data('mutate-bottom', e.css('bottom'));
 
-					if ($(n).data('mutate-bottom')&&$(n).css('bottom') != $(n).data('mutate-bottom')  ) {
-						$(n).data('mutate-bottom', $(n).css('bottom'));
+					if (e.data('mutate-bottom')&&e.css('bottom') != e.data('mutate-bottom')  ) {
+						e.data('mutate-bottom', e.css('bottom'));
 						return true;
 					}
 				}
@@ -48,10 +50,11 @@ mutate_event_stack = [
 			{
 				name		: 'right',
 				handler 	: function (n){
-					if(!$(n).data('mutate-right'))$(n).data('mutate-right', $(n).css('right'));
+          var e = $(n);
+					if(!e.data('mutate-right'))e.data('mutate-right', e.css('right'));
 
-					if ($(n).data('mutate-right')&&$(n).css('right') != $(n).data('mutate-right')  ) {
-						$(n).data('mutate-right', $(n).css('right'));
+					if (e.data('mutate-right')&&e.css('right') != e.data('mutate-right')  ) {
+						e.data('mutate-right', e.css('right'));
 						return true;
 					}
 				}
@@ -59,10 +62,11 @@ mutate_event_stack = [
 			{
 				name		: 'left',
 				handler 	: function (n){
-					if(!$(n).data('mutate-left'))$(n).data('mutate-left', $(n).css('left'));
+          var e = $(n);
+					if(!e.data('mutate-left'))e.data('mutate-left', e.css('left'));
 
-					if ($(n).data('mutate-left')&&$(n).css('left') != $(n).data('mutate-left')  ) {
-						$(n).data('mutate-left', $(n).css('left'));
+					if (e.data('mutate-left')&&e.css('left') != e.data('mutate-left')  ) {
+						e.data('mutate-left', e.css('left'));
 						return true;
 					}
 				}
@@ -70,9 +74,10 @@ mutate_event_stack = [
 			{
         name    : 'hide',
         handler   : function (n){
-          var isHidden = $(n).is(':hidden'),
-              prevHidden = $(n).data('prev-hidden') == undefined ? isHidden : $(n).data('prev-hidden')
-          $(n).data('prev-hidden', isHidden)
+          var e = $(n);
+          var isHidden = e.is(':hidden'),
+              prevHidden = e.data('prev-hidden') == undefined ? isHidden : e.data('prev-hidden')
+          e.data('prev-hidden', isHidden)
           if (isHidden && isHidden != prevHidden) {
             return true;
           }
@@ -81,9 +86,10 @@ mutate_event_stack = [
       {
         name    : 'show',
         handler   : function (n){
-          var isVisible = $(n).is(':visible'),
-              prevVisible = $(n).data('prev-visible') == undefined ? isVisible : $(n).data('prev-visible')
-          $(n).data('prev-visible', isVisible)
+          var e = $(n);
+          var isVisible = e.is(':visible'),
+              prevVisible = e.data('prev-visible') == undefined ? isVisible : e.data('prev-visible')
+          e.data('prev-visible', isVisible)
           if (isVisible && isVisible != prevVisible) {
             return true;
           }
@@ -92,10 +98,11 @@ mutate_event_stack = [
 			{
 				name		: 'scrollHeight',
 				handler 	: function (n){
-					if(!$(n).data('prev-scrollHeight'))$(n).data('prev-scrollHeight', $(n)[0].scrollHeight);
+          var e = $(n);
+					if(!e.data('prev-scrollHeight'))e.data('prev-scrollHeight', e[0].scrollHeight);
 
-					if ($(n).data('prev-scrollHeight')&&$(n)[0].scrollHeight != $(n).data('prev-scrollHeight')  ) {
-						$(n).data('prev-scrollHeight', $(n)[0].scrollHeight);
+					if (e.data('prev-scrollHeight')&&e[0].scrollHeight != e.data('prev-scrollHeight')  ) {
+						e.data('prev-scrollHeight', e[0].scrollHeight);
 						return true;
 					}
 				}
@@ -103,10 +110,11 @@ mutate_event_stack = [
 			{
 				name		: 'scrollWidth',
 				handler 	: function (n){
-					if(!$(n).data('prev-scrollWidth'))$(n).data('prev-scrollWidth', $(n)[0].scrollWidth);
+          var e = $(n);
+					if(!e.data('prev-scrollWidth'))e.data('prev-scrollWidth', e[0].scrollWidth);
 
-					if ($(n).data('prev-scrollWidth')&&$(n)[0].scrollWidth != $(n).data('prev-scrollWidth')  ) {
-						$(n).data('prev-scrollWidth', $(n)[0].scrollWidth);
+					if (e.data('prev-scrollWidth')&&e[0].scrollWidth != e.data('prev-scrollWidth')  ) {
+						e.data('prev-scrollWidth', e[0].scrollWidth);
 						return true;
 					}
 				}
@@ -114,10 +122,11 @@ mutate_event_stack = [
 			{
 				name		: 'scrollTop',
 				handler 	: function (n){
-					if(!$(n).data('prev-scrollTop'))$(n).data('prev-scrollTop', $(n)[0].scrollTop());
+          var e = $(n);
+					if(!e.data('prev-scrollTop'))e.data('prev-scrollTop', e[0].scrollTop());
 
-					if ($(n).data('prev-scrollTop')&&$(n)[0].scrollTop() != $(n).data('prev-scrollTop')  ) {
-						$(n).data('prev-scrollTop', $(n)[0].scrollTop());
+					if (e.data('prev-scrollTop')&&e[0].scrollTop() != e.data('prev-scrollTop')  ) {
+						e.data('prev-scrollTop', e[0].scrollTop());
 						return true;
 					}
 				}
@@ -125,10 +134,11 @@ mutate_event_stack = [
 			{
 				name		: 'scrollLeft',
 				handler 	: function (n){
-					if(!$(n).data('prev-scrollLeft'))$(n).data('prev-scrollLeft', $(n)[0].scrollLeft());
+          var e = $(n);
+					if(!e.data('prev-scrollLeft'))e.data('prev-scrollLeft', e[0].scrollLeft());
 
-					if ($(n).data('prev-scrollLeft')&&$(n)[0].scrollLeft() != $(n).data('prev-scrollLeft')  ) {
-						$(n).data('prev-scrollLeft', $(n)[0].scrollLeft());
+					if (e.data('prev-scrollLeft')&&e[0].scrollLeft() != e.data('prev-scrollLeft')  ) {
+						e.data('prev-scrollLeft', e[0].scrollLeft());
 						return true;
 					}
 				}
