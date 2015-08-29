@@ -9,3 +9,12 @@ If you wish to have it perform better and have a better handling of binding & un
 
 sign up at www.jqui.net newsletter I will send an email with an update.
 
+
+## Install
+```
+composer require "bower-asset/jquery-mutate:dev-master"
+```
+or
+```
+bower install jquery-mutate
+```
